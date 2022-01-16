@@ -7,7 +7,7 @@ from model import PedalNet
 def main(args):
     model = PedalNet(vars(args))
     trainer = pl.Trainer(
-        max_epochs=args.max_epochs, gpus=args.gpus, row_log_interval=100
+        max_epochs=args.max_epochs, gpus=args.gpus, log_every_n_steps=100
     )
     trainer.fit(model)
 

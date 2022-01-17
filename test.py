@@ -3,6 +3,7 @@ import torch
 from scipy.io import wavfile
 import argparse
 import numpy as np
+import os
 
 from model import PedalNet
 
@@ -28,9 +29,9 @@ def test(args):
     y_pred = np.concatenate(y_pred)
     y_pred = y_pred[:, :, -x_test.shape[2] :]
 
-    save("y_pred.wav", y_pred)
-    save("x_test.wav", data["x_test"] * data["std"] + data["mean"])
-    save("y_test.wav", data["y_test"])
+    save(os.path.dirname(args.model) + "/y_pred.wav", y_pred)
+    save(os.path.dirname(args.model) + "/x_test.wav", data["x_test"] * data["std"] + data["mean"])
+    save(os.path.dirname(args.model) + "/y_test.wav", data["y_test"])
 
 
 if __name__ == "__main__":

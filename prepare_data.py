@@ -9,6 +9,11 @@ def main(args):
     out_rate, out_data = wavfile.read(args.out_file)
     assert in_rate == out_rate, "in_file and out_file must have same sample rate"
 
+    #NORMALIZE in range -1,1  depending on format!!!
+    if in_data.max()>2**8:
+        in_data = in_data*(2**-15)
+        out_data = out_data*(2**-15)
+
     sample_size = int(in_rate * args.sample_time)
     length = len(in_data) - len(in_data) % sample_size
 
